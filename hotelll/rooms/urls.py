@@ -1,6 +1,6 @@
 from .views import (
     UserProfileListAPIView, UserProfileEditAPIView, CityListAPIView, CityDetailAPIView, HotelListAPIView, HotelDetailAPIView,
-    RoomsListAPIView, RoomsDetailAPIView, BronListAPIView, ReviewCreateAPIView, ReviewEditAPIView
+    RoomsListAPIView, RoomsDetailAPIView, BronListAPIView, ReviewCreateAPIView, ReviewEditAPIView, RegisterView, LoginView, LogoutView
 )
 
 from django.urls import path, include
@@ -30,5 +30,9 @@ urlpatterns = [
     path('review/', ReviewCreateAPIView.as_view(), name='review_list'),
     path('review_edit/', ReviewEditAPIView.as_view(), name='review_edit'),
 
-    path('bron/', BronListAPIView.as_view(), name='bron_edit')
+    path('bron/', BronListAPIView.as_view(), name='bron_edit'),
+
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout')
 ]
