@@ -87,8 +87,8 @@ class RoomImages(models.Model):
 
 
 class Bron(models.Model):
-    customer = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='hotel_bron')
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='hotel_bron')
+    customer = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     room = models.ForeignKey(Rooms, on_delete=models.CASCADE, related_name='room_bron')
     check_in = models.DateField()
     check_out = models.DateField()
@@ -103,9 +103,11 @@ class Review(models.Model):
     hotel_review = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='review_hotel')
     room_review = models.ForeignKey(Rooms, on_delete=models.CASCADE, related_name='review_room')
     stars = models.IntegerField(choices=[(i, str(i)) for i in range(1, 11)], null=True, blank=True)
-    text = models.TextField(null=True, blank=True)
+    text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('user', 'stars')
 
     def __str__(self):
         return f'{self.user}, {self.stars}'
